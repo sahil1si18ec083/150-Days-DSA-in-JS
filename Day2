@@ -1,0 +1,25 @@
+Question 1
+Given an integer array nums and an integer k, return true 
+if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+
+
+Solution: Jab vbe repeated elements ka index chahia use hashmap
+var containsNearbyDuplicate = function(nums, k) {
+    const n= nums.length;
+    const map = new Map();
+    for(let i=0;i<n;i++){
+        if(map.has(nums[i])){
+            if(Math.abs(i-map.get(nums[i]))<=k){
+                return true;
+            }
+           map.set(nums[i],i);
+
+        }
+        else{
+            map.set(nums[i],i);
+        }
+       
+    }
+    return false;
+    
+};
