@@ -1,1 +1,77 @@
+Question 1
+https://leetcode.com/problems/find-pivot-index/
+Make a leftsum array that tracks the left side sum of the array elements
+Now iterate on the array and calculate the right sum and check if the right sum is equal to the corresponding left sum 
+If it is equal then return the index otherwise return -1
 
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var pivotIndex = function(nums) {
+    // make an arrry that contains the left sum
+    let lsum=0;
+    const lArray=[];
+    let j=0;
+    for (let i=0;i<nums.length;i++){
+        lArray[j]=lsum;
+        lsum=lsum+ nums[i];
+        j++;
+        
+    }
+    console.log(lsum)
+    console.log(lArray)
+    for (let i=0;i<nums.length;i++){
+        lsum=lsum-nums[i];
+        if(lsum==lArray[i]){
+            return i;
+        }
+    }
+    return -1;
+    
+};
+
+
+
+Question 2
+https://leetcode.com/problems/3sum-closest/
+Given an integer array nums of length n and an integer target, 
+find three integers in nums such that the sum is closest to target.
+The approach is to keep three pointers one on i, other on i+1 and last one on n-1 
+and apply a three sum technique after sorting
+Here we need to keeps a track of Modulo of arr[i]+arr[j]+arr[k]- target
+When the diffrence is less , then update the difference
+
+var threeSumClosest = function(nums, target)
+ {
+    const n = nums.length;
+    let diff=12129993;
+    let result;
+    nums.sort((a,b)=>a-b);
+    for (let i=0;i<n-2;i++){
+        let j=i+1;
+        let k=n-1;
+        while(k>j){
+          
+            if(Math.abs(nums[i]+nums[j]+nums[k]-target)<diff){
+                diff=Math.abs(nums[i]+nums[j]+nums[k]-target);
+                result=nums[i]+nums[j]+nums[k]
+            }
+            if(nums[i]+nums[j]+nums[k]==target){
+                j++;
+                k--;
+            }
+            else if (nums[i]+nums[j]+nums[k]<target){
+                j++;
+
+
+            }
+            else{
+                k--;
+            }
+        }
+    }
+    // console.log(diff)
+    return result
+    
+};
