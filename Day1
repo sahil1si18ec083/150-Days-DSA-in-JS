@@ -75,3 +75,22 @@ var threeSumClosest = function(nums, target)
     return result
     
 };
+
+
+Question 3
+Dutch national Flag
+It Works on the simple concept that we have two pointers low and high
+elements corresponding to the low pointer will be all zeros
+Meaning low pointer indicates that the elenments to the left of it will be zeros 
+And high pointer indiactes that the elements corresponding to its right will be 2s
+Donot call it Alogorithm
+It is basic commom sense to keep two pointers
+And iterate over the array
+If we get a zero, swap the current element with the arr[low] and update the low pointer
+If we get a 1 then do not do anything
+If we get a 2s, then sap it with arr[high] because the pointer high shows that the elements to its right will be only twos
+In this while when we iterate over the array, we will get some low and high values
+Elements in left of low will be 0s, and in right of high will be 2s
+And 1s will be stuck in the midddle
+This is our Intuition which we call as dutch national Flag
+https://media.geeksforgeeks.org/wp-content/uploads/20220804131121/5th.png
