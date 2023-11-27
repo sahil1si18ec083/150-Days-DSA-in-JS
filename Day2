@@ -23,3 +23,41 @@ var containsNearbyDuplicate = function(nums, k) {
     return false;
     
 };
+
+Question 2
+https://leetcode.com/problems/happy-number/
+A happy number is a number defined by the following process:
+
+Starting with any positive integer, replace the number by the sum of the squares of its digits.
+Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.
+Those numbers for which this process ends in 1 are happy.
+
+Algorithm
+If number is a happy number then on squaring its digits , we will get a 1 at the end
+But in case of unhappy numbers we will not get a 1 we will get a value which we earlier got
+Means we  can keep  a hashmap and keep a track of all the values that are generted by sqauring the digits
+
+var isHappy = function(n) {
+
+    function returnSquare(num){
+        let result=0;
+        while(num!=0){
+            result+=((num%10)*(num%10));
+            num=Math.floor(num/10);
+        }
+        return result;
+    }
+    const map = new Map();
+
+    while((!map.has(n)) || n==1){
+        if(n===1){
+            return true
+        }
+        
+        map.set(n,0);
+        n=returnSquare(n)
+
+    }
+    console.log(map)
+    return false 
+};
