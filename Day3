@@ -1,0 +1,32 @@
+Given two arrays: a1[0..n-1] of size n and a2[0..m-1] of size m.
+Task is to check whether a2[] is a subset of a1[] or not.
+
+class Solution{
+    isSubset(a1, a2, n, m){
+        //code here
+        const map = new Map();
+        for (let i=0;i<n;i++){
+            if(map.has(a1[i])){
+                map.set(a1[i], map.get(a1[i])+1)
+                
+            }
+            else{
+                map.set(a1[i],1)
+                
+            }
+            
+        }
+        
+        for (let i=0;i<m;i++){
+            if(map.get(a2[i])>0){
+                map.set(a2[i],map.get(a2[i])-1)
+            }
+            else{
+                return "No";
+            }
+        }
+          
+        return "Yes";
+    }
+}
+
