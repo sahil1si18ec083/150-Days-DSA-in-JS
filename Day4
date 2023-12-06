@@ -22,3 +22,124 @@ class Solution {
         return res;     
     }
 }
+
+
+## Find forest search in an array
+
+First brute force is take a low pointer 0 and high pointer say H and get is the  biggest element of the array
+Iterate from for loop i=0 to i=H and check for every value of i 
+that is it getting satisfied for the required area
+If it is getting satisfied then return that i value
+The complexity will be 0(H) 0(N)
+Now lets optimise this approach
+HOW you will optimise this code
+Take a low pointer low=0
+HIGH=  high=tree[tree.length-1];
+In place of checking or every value of i from 0 to High use binary search
+If the required area is equal return mid
+  else if (area>k){
+                low=mid+1
+                
+ }
+This way our code is optimised in the order O(logh) O(N)
+//{ Driver Code Starts
+//Initial Template for javascript
+
+"use strict";
+
+process.stdin.resume();
+process.stdin.setEncoding("utf-8");
+
+let inputString = "";
+let currentLine = 0;
+
+process.stdin.on("data", (inputStdin) => {
+  inputString += inputStdin;
+});
+
+process.stdin.on("end", (_) => {
+  inputString = inputString
+    .trim()
+    .split("\n")
+    .map((string) => {
+      return string.trim();
+    });
+
+  main();
+});
+
+function readLine() {
+  return inputString[currentLine++];
+}
+
+function printArray(res, n){
+    let s="";
+    for(let i=0;i<n;i++){
+        s+=res[i];;
+        s+=" "; 
+    }
+    console.log(s);
+}
+
+function main() {
+  let t = parseInt(readLine());
+  let i = 0;
+  for (; i < t; i++) {
+    let n = parseInt(readLine());
+    let input = readLine().split(' ').map(x => parseInt(x));
+    let arr = [];
+    for(let i=0;i<n;i++){
+        arr.push(input[i]);
+    }
+    let x = parseInt(readLine());
+    let obj = new Solution();
+    let res = obj.find_height(arr, n, x);
+    console.log(res);
+  }
+}
+
+
+
+// } Driver Code Ends
+
+
+//User function Template for javascript
+
+/**
+ * @param {number[]} tree
+ * @param {number} n
+ * @param {number} k
+ * @returns {number}
+ */
+
+class Solution {
+    find_height(tree, n, k) {
+        //code here
+        tree.sort((a,b)=>a-b);
+        let low=0;
+        let high=tree[tree.length-1];
+        while(low<=high){
+            let mid = Math.floor((low+high)/2);
+            let area=0;
+            for (let i=0;i<n;i++){
+               if(tree[i]>mid){
+                   area+=tree[i]-mid
+               }
+                
+            }
+            if(area===k){
+                return mid;
+            }
+            else if (area>k){
+                low=mid+1
+                
+            }
+            else {
+                high= mid-1
+                
+            }
+        }
+        return -1;
+    }
+    
+}
